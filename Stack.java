@@ -1,78 +1,91 @@
+/*
+Question: Write implementation of stack.
+ */
+
+/**
+ *
+ * @author Gowri Arunsha
+ */
 import java.io.*;
-public class Stack
-{
-	int A[];
-	int top;
-	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-	public Stack()
-	{
-		A=new int[50];
-		top=-1;
-	}
-	public void main(String args[])throws IOException
-	{
-		
-		System.out.println("\t\t\tMENU\n1. push\n2. pop\n3. display\n0. exit\n");
+public class Stack {
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Input max:");
+        int n=Integer.parseInt(br.readLine());
+        int A[]=new int[n];
+        int top=-1;
+        int ch=-1;
+        //menu insert pop top exit
+        System.out.println("\t\tMENU\n1.push\n2.pop\n3.top\n4.display\n0.exit");
 
-		int ch;
-		do{
-			System.out.println("Input choice:");
-			ch=Integer.parseInt(br.readLine());
-
-		switch(ch)
-		{
-
-			case 1:System.out.println("Input element to be pushed:");
-				int x=Integer.parseInt(br.readLine());
-				push(x);
-				break;
-			case 2:pop();
-				break;
-			case 3:display();
-				break;
-			case 0:System.out.println("Exiting program...");
-				System.exit(0);
-			default:System.out.println("Invalid choice!!");
-
-		}
-		}while(ch!=0);
-	}
-	public void pop()
-	{
-		if(top==-1)
-		{
-			System.out.println("Empty stack");
-			return;
-		}
-		else
-		{
-			return top--;
-		}
-	}
-	public void push(int x)
-	{
-		if(top==49)
-		{
-			System.out.println("Overflow");
-			return;
-		}
-		else
-		{
-			top++;
-			A[top]=x;
-		}
-		
-	}
-	public void display()
-	{
-		System.out.println("Displaying stack...");
-
-		for(int i=0;i<=top;i++)
-		{
-			System.out.print(A[i]+"\t");
-		}
-	}
-
+        do{
+            System.out.println("Input your choice:");
+            ch=Integer.parseInt(br.readLine());
+            switch(ch)
+            {
+                case 1:
+                    System.out.println("Input element to be pushed:");
+                    int item=Integer.parseInt(br.readLine());
+                    top=push(A,top,item,n);
+                    break;
+                case 2:
+                    top=pop(A,top);
+                    break;
+                case 3:
+                    top(A,top);
+                    break;
+                case 4:
+                    display(A,top);
+                    break;
+                case 0:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Error: Invalid choice!");
+                    
+            }
+            
+        }while(ch!=0);
+        
+        
+    }
+    
+    public static int push(int[] A,int top,int item,int n)
+    {
+        if(top==n-1)
+        {
+            System.out.println("Error: Stack is full!");
+            return top;
+        }
+        A[++top]=item;
+        return top;
+        
+    }
+    
+    public static int pop(int[] A,int top)
+    {
+        //if empty 
+        if(top==-1)
+        {
+            System.out.println("Error:Stack Empty!");
+            return top;
+        }
+        System.out.println("Element Popped:"+A[top--]);
+        return top;
+    }
+    
+    public static void top(int[] A,int top)
+    {
+        System.out.println("Top:"+A[top]);
+    }
+    
+    public static void display(int[] A, int top)
+    {
+        for(int i=0;i<=top;i++)
+        {
+            System.out.print(A[i]+"\t");
+        }
+        System.out.println();
+    }
 }
-
-
